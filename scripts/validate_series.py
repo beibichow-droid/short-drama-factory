@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""short-drama-factory v3.2 全剧台账机检
+"""short-drama-factory v4.2 全剧台账机检
 
 用法:
-    python3 validate_series.py <台账.md> [--episodes 80] [--script-dir 剧本目录]
-    python3 validate_series.py --self-test
+    python validate_series.py <台账.md> [--episodes 80] [--script-dir 剧本目录]
+    python validate_series.py --self-test
+    （Windows 用 python；macOS / Linux 用 python3）
 
 台账为 markdown 表格文件（templates/ledger.md 格式），四类账：
     伏笔账 / 人物账 / 道具账 / 世界观规则账
@@ -20,6 +21,9 @@
     S5  断章缺失扫描: --script-dir 时逐集查【本集断章卡点】    FAIL(缺)
     S6  付费墙落位: 三档总集数下墙集区间内无"墙"标记行         WARN
     S7  台账必备四表齐全                                      FAIL(缺表)
+    S8  反转手段轮换: 反转手段矩阵表相邻3集内复用同一[A-I]标签  WARN
+        (A身份压制/B铁证如山/C盟友倒戈/D降维制裁/E诛心破防/F纯粹武力
+         /G情感剥夺/H舆论社死/I借刀自噬; G/H/I为女频文戏新增)
 退出码: 0=通过, 1=FAIL, 2=用法错误
 """
 import re
@@ -33,8 +37,10 @@ TABLE_KEYS = {"伏笔": "伏笔账", "人物": "人物账", "道具": "道具账
 
 
 def _rows(text, section_kw):
-    """取某账小节后的 markdown 表格数据行"""
-    m = re.search(r"#+.*?" + section_kw + r".*?\n(.*?)(?=\n#+\s|\Z)", text, re.S)
+    """取某账小节后的 markdown 表格数据行
+    （标题匹配限定在单行内，避免表格正文里出现的关键词（如伏笔备注里的'人物'）
+     把小节解析带偏）"""
+    m = re.search(r"^#+[^\n]*?" + section_kw + r"[^\n]*\n(.*?)(?=^#+\s|\Z)", text, re.S | re.M)
     if not m:
         return None
     rows = []
@@ -44,6 +50,32 @@ def _rows(text, section_kw):
             cells = [c.strip() for c in s.strip("|").split("|")]
             rows.append(cells)
     return rows[1:] if rows else []  # 去表头
+
+
+def _reversal_entries(text):
+    """解析'反转手段轮换矩阵'表, 返回按集数升序的 [(ep:int, tag:str)]。
+
+    集数取自表格首列, 标签取本行内首个 [A-I]。表缺失或无有效行返回 []。
+    """
+    m = re.search(r"#+.*?反转手段轮换矩阵.*?\n(.*?)(?=\n#+\s|\Z)", text, re.S)
+    out = []
+    if not m:
+        return out
+    for line in m.group(1).splitlines():
+        s = line.strip()
+        if not s.startswith("|"):
+            continue
+        if re.match(r"^\|[\s\-:|]+\|$", s):
+            continue  # 分隔行
+        cells = [c.strip() for c in s.strip("|").split("|")]
+        if not cells or "集数" in cells[0]:
+            continue  # 表头
+        em = re.search(r"(\d+)", cells[0])
+        tm = re.search(r"\[([A-I])\]", s)
+        if em and tm:
+            out.append((int(em.group(1)), tm.group(1)))
+    out.sort()
+    return out
 
 
 def validate_ledger(text, total_eps=80, scripts=None):
@@ -121,6 +153,17 @@ def validate_ledger(text, total_eps=80, scripts=None):
     for lo, hi in ranges:
         if not any(lo <= x <= hi for x in marks):
             warns.append(f"S6 未见付费墙落在第{lo}~{hi}集区间(三档各需一条'X级墙 第N集'标记)")
+
+    # S8 反转手段轮换: 相邻3集内(集数差<=2)复用同一[A-I]标签 → WARN
+    rev = _reversal_entries(text)
+    for i in range(len(rev)):
+        e1, t1 = rev[i]
+        for j in range(i + 1, len(rev)):
+            e2, t2 = rev[j]
+            if e2 - e1 > 2:
+                break  # 已按集数升序, 更远的对不再落在3集窗口内
+            if t1 == t2:
+                warns.append(f"S8 反转手段重复: EP{e1}与EP{e2}相邻3集内复用[{t1}]")
     return fails, warns, cur
 
 
@@ -215,6 +258,31 @@ def self_test():
     if not any("S6" in x for x in w8):
         print("FAIL self-test: 标准档墙集数按长档 40 集核对应报 S6:", w8); ok = 0
 
+    # 回归: S8 反转手段轮换——相邻3集复用同一标签应 WARN, 正常轮换不报
+    led_s8_bad = LEDGER_GOOD + """
+## 反转手段轮换矩阵
+| 集数 | 反转标签 | 核心冲突事件 | 攻守方 | 爽点结算 |
+|---|---|---|---|---|
+| EP1 | [F] 纯粹武力 | 破门踹翻打手 | 主角 vs 反派 | 肢体压制 |
+| EP2 | [A] 身份压制 | 亮出真实身份 | 亲信 vs 反派家族 | 阶层逆转 |
+| EP3 | [F] 纯粹武力 | 再次武力控场 | 主角 vs 反派 | 爽点重复 |
+"""
+    _, w_s8b, _ = validate_ledger(led_s8_bad, 80)
+    if not any(x.startswith("S8") and "EP1与EP3" in x and "[F]" in x for x in w_s8b):
+        print("FAIL self-test: 相邻3集复用[F]应报 S8:", w_s8b); ok = 0
+    led_s8_good = LEDGER_GOOD + """
+## 反转手段轮换矩阵
+| 集数 | 反转标签 | 核心冲突事件 | 攻守方 | 爽点结算 |
+|---|---|---|---|---|
+| EP1 | [F] 纯粹武力 | 破门踹翻打手 | 主角 vs 反派 | 肢体压制 |
+| EP2 | [A] 身份压制 | 亮出真实身份 | 亲信 vs 反派家族 | 阶层逆转 |
+| EP3 | [B] 铁证如山 | 亮出原始黑账 | 主角 vs 前妻 | 道德崩塌 |
+| EP4 | [C] 盟友倒戈 | 核心靠山反水 | 大伯 vs 反派 | 现场倒戈 |
+"""
+    _, w_s8g, _ = validate_ledger(led_s8_good, 80)
+    if any(x.startswith("S8") for x in w_s8g):
+        print("FAIL self-test: 正常轮换不应报 S8:", w_s8g); ok = 0
+
     print("[+] self-test PASSED" if ok else "[-] self-test FAILED")
     return 0 if ok else 1
 
@@ -229,8 +297,12 @@ def main():
         led = pathlib.Path(args[0]).read_text(encoding="utf-8")
     except FileNotFoundError:
         print(f"[-] 找不到台账文件: {args[0]}"); return 2
+    except IsADirectoryError:
+        print(f"[-] 路径是目录，不是台账文件: {args[0]}"); return 2
     except UnicodeDecodeError:
         print(f"[-] 台账不是 UTF-8 文本: {args[0]}"); return 2
+    except OSError as e:
+        print(f"[-] 无法读取台账文件: {args[0]}（{e}）"); return 2
     total = 80
     if "--episodes" in args:
         try:
@@ -247,12 +319,16 @@ def main():
             print(f"[-] 剧本目录不存在: {d}"); return 2
         scripts = {}
         for p in sorted(d.glob("*.md")):
+            # 只认真正的分集文件：文件名须含「集」/「EP」，或为纯数字名——
+            # 避免「00-总纲.md」这类带数字前缀的非分集文件被当成第 0 集报 S5
+            if not (re.search(r"集|EP", p.stem, re.I) or re.fullmatch(r"\d+", p.stem)):
+                continue
             m = re.search(r"(\d+)", p.stem)
             if m:
                 try:
                     scripts[int(m.group(1))] = p.read_text(encoding="utf-8")
-                except UnicodeDecodeError:
-                    print(f"[-] 跳过非 UTF-8 剧本: {p}")
+                except (UnicodeDecodeError, OSError) as e:
+                    print(f"[-] 跳过无法读取的剧本: {p}（{e}）")
     fails, warns, cur = validate_ledger(led, total, scripts)
     print(f"== {args[0]}  总集数={total} 当前集={cur} ==")
     for x in fails:

@@ -1,7 +1,7 @@
-<img src="assets/banner.svg" alt="Short-Drama Factory v3.2 · 抖音/红果爆款短剧工业化编剧超级系统" width="100%">
+<img src="assets/banner.svg" alt="Short-Drama Factory v4.3 · 抖音/红果爆款短剧工业化编剧超级系统" width="100%">
 
 <p align="center">
-<a href="#核心方法论情绪契约单元链"><img src="https://img.shields.io/badge/version-v3.2.0-gold?style=for-the-badge" alt="version"></a>
+<a href="#核心方法论情绪契约单元链"><img src="https://img.shields.io/badge/version-v4.3-gold?style=for-the-badge" alt="version"></a>
 <a href="#篇幅三档"><img src="https://img.shields.io/badge/%E7%AF%87%E5%B9%85-%E6%A0%87%E5%87%86%20%2F%20%E9%95%BF%E6%A1%A33%E5%88%86%E9%92%9F%20%2F%20%E6%BC%AB%E5%89%A7-ff69b4?style=for-the-badge" alt="lengths"></a>
 <a href="#能力"><img src="https://img.shields.io/badge/%E7%BA%AF%E5%89%A7%E6%9C%AC%E5%BC%95%E6%93%8E-8%E4%B8%AA%E6%A8%A1%E5%BC%8F-8a2be2?style=for-the-badge" alt="modes"></a>
 <a href="#能力"><img src="https://img.shields.io/badge/%E7%BB%93%E6%9E%84-60%2F80%2F100%E9%9B%86%20%2B%20%E9%95%BF%E6%A1%A330%2F40%2F50%E9%9B%86-6f42c1?style=for-the-badge" alt="structure"></a>
@@ -9,22 +9,22 @@
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge" alt="license"></a>
 </p>
 
-<h1 align="center">Short-Drama Factory v3.2</h1>
+<h1 align="center">Short-Drama Factory v4.3</h1>
 <p align="center"><b>抖音 / 红果 爆款短剧工业化编剧超级系统</b></p>
 
 > **一句创意进，一部带付费墙的爆款剧本出。**
-> 情绪契约贯穿全剧，矛盾按单元跑——单矛盾绝不烧过 30 集；篇幅可选标准 / 长档（约 3 分钟）/ 漫剧。
+> 情绪契约贯穿全剧，矛盾按单元跑——单矛盾绝不烧过 30 集；篇幅可选标准 / 长档（150~195 秒弹性）/ 漫剧；台词 / 内心独白 / 旁白三通道分流，独白走配额。
 > 只产剧本层，不碰分镜 / 资产 / 视频制作。
 
 纯剧本引擎：把一句创意、一部网文、一个脑洞，稳定转化为符合红果付费生态的爆款短剧剧本。
 
 ## 篇幅三档
 
-| 档位 | 单集时长 | 正文体量（实拍 / 漫剧） | 单集拍数 | 全剧集数档 |
+| 档位 | 单集时长（典型值；可调整） | 正文体量【参考·随时长换算】 | 单集拍数 | 全剧集数档 |
 |---|---|---|---|---|
-| 标准档（默认） | 90～120 秒 | 350～500 / 260～400 | 1 拍 | 60 / 80 / 100 |
-| **长档** | **165～195 秒（约 3 分钟）** | **650～850 / 520～680** | **2 拍 + 中段小钩** | **30 / 40 / 50** |
-| 漫剧档 | 60～90 秒 | 260～400 | 1 拍 | 60 / 80 / 100 |
+| 标准档（默认） | 90～120 秒 | 480～850 / 330～620 | 1 拍 | 60 / 80 / 100 |
+| **长档** | **150～195 秒（按内容密度倒推）** | **820～1400 / 660～1150** | **2 拍 + 中段小钩** | **30 / 40 / 50** |
+| 漫剧档 | 60～90 秒 | 330～620 | 1 拍 | 60 / 80 / 100 |
 
 > 长档不是把标准档注水拉长：一集必须装**两个往返回合**（回合A/回合B，施压与反驳各升一档）+ ≈90 秒处一个**中段小钩**（新信息/新威胁，只抬价不爆点）；全剧按内容量守恒折算（1 长档集 ≈ 2 标准集），四幕、单元链、付费墙同步换算。
 
@@ -40,12 +40,15 @@
 ## 能力
 
 1. **流派智能分流**（`references/emotion-flow-roundtrip.md`）：立项先判情绪流 ⇄ 剧情流，情绪流走契约单元链，剧情流走信息阶梯；含下沉题材批量生成器。
-2. **篇幅三档 + 长档双回合**（`references/hongguo-beat-sheet.md`）：标准 90～120 秒 / **长档约 3 分钟（一集两拍 + 中段小钩）** / 漫剧 60～90 秒；长档全剧折算 30/40/50 集并同步四幕与三级付费墙。
-3. **跨集连续性台账**（`references/continuity-ledger.md` + `templates/ledger.md` + `/连写 N-M`）：伏笔/人物/道具/规则四账，无台账不开写，多集连写不穿帮。
+2. **篇幅三档 + 长档双回合**（`references/hongguo-beat-sheet.md`）：标准 90～120 秒 / **长档 150～195 秒弹性（一集两拍 + 中段小钩）** / 漫剧 60～90 秒；**时长守恒双闸门**——【本集时长】按"台词÷4.5字/s（目标）＋动作拍"倒推（E16 按4.5字/s校验下限拦虚标），且**长档不得低于 150 秒**（E17 拦"挂着长档名头、交标准档体量"）；要 180 秒就得有 ≥800 字纯台词，宁写 150 秒扎实集，不写 180 秒注水集；长档全剧折算 30/40/50 集并同步四幕与三级付费墙；新增**E19 15秒窗口≤95字**生产端WARN校验。
+3. **跨集连续性台账 + A~I反转轮换**（`references/continuity-ledger.md` + `templates/ledger.md` + `/连写 N-M`）：伏笔/人物/道具/规则四账 + **A~I九类反转手段轮换矩阵**（相邻3集禁复用同标签，机检S8 WARN）+ **冷热台账分层**（热台账最近5集连写仅挂载，冷归档已结案免传），无台账不开写，多集连写不穿帮。
 4. **网文改编流水线**（`references/webnovel-adaptation.md`）：抽取→砍并→章集映射→回合化→入系统，兑现"网文→剧本"。
 5. **人物圣经**（`references/character-bible.md`）：欲望/秘密/弧光/语言指纹四件套 + 功能位配额，先于大纲建档。
-6. **机制级仿写**（`references/mechanism-imitation.md`）：结构可仿、表达不可抄的三层拆解与换皮规程；题材扩至 12+ 赛道（`genre-map.md`）。
-7. **红线机器化**（`scripts/`）：单集**分档**机检（正文体量 标准 350～500 / 长档 650～850 / 漫剧 260～400 · 场景 ≤2（长档 ≤3）· 前 3 秒冲突 · 断章存在 · **长档中段小钩** · 单句硬上限 ≤25 · 复读检测 · 合规红线）+ 全剧台账机检（伏笔超期 / 死人开口 / 断章缺失扫描 / 付费墙落位（标准 60/80/100 + 长档 30/40/50 两套区间）/ 四账齐全），均含 self-test。
+6. **机制级仿写**（`references/mechanism-imitation.md`）：结构可仿、表达不可抄的三层拆解与换皮规程；题材扩至 **40 赛道**（`genre-map.md`，男频12/女频14/中性14，含赛道知识速查：受众画像 / 集数档 / 付费墙断点 / 爽感曲线 / 平台趋势；2026-09 经 DataEye/新榜/红果/抖音端原生公开榜单逐条核验改名，附录列修订依据）。
+7. **前三集节拍卡**（`references/first-three-eps-beat-card.md`，v4.1 新增）：六部实拍 S 本拆解归纳——E1 受害+立场（90s 锁站队）→ E2 证据回放/考验递进 → E3 冲突升级；递减/波动/V型/微集四类节奏型按赛道选型；配套固定件：【本集物证】每集 1~2 个贯穿物证（情绪落点，AI 生图友好）+【质疑者配角】替观众说狠话的人设位。钩子库同步补「账本清算式」「双向马甲式」两变体。
+8. **红线机器化**（`scripts/`）：单集**分档**机检（正文体量 标准 480～850 / 长档 820～1400 / 漫剧 330～620 · 场景 ≤2（长档 ≤3）· 前 3 秒冲突 · 断章存在 · **长档中段小钩** · 单气口≤25字（按clause精准限定对白）· 复读检测 · 合规红线 · **独白/旁白 E12～E15** · **长档时长守恒 E16 虚标 / E17 降级** · **E19 15秒窗口≤95字** · **E20 动作单段≤40字** · **E21 对白/动作黄金比25%~70%**）+ 全剧台账机检（伏笔超期 / 死人开口 / 断章缺失扫描 / 付费墙落位（标准 60/80/100 + 长档 30/40/50 两套区间）/ 四账齐全 / **S8 反转手段轮换**），均含 self-test；另有 **N12～N14 保护性反例（NOTE 级，不要求修改）**。**动态按需挂载矩阵**（8交互模式×仅挂载核心文件）防Context爆炸。
+9. **戏剧工艺层＋独白通道**（`references/craft-quality-layer.md` · `references/inner-monologue-vo.md`，v3.4 新增）：补"机检全过但戏是假的"这一层——因果生成链（判断→反作用→结果认知→下一选择）、单场七问、三线可见变化、概念负荷最小登记、远简近详状态包、七级修订顺序；并把**独白/旁白列为正式通道**——台词＝场内攻防／内心独白＝只有观众听见的委屈与心事／旁白＝点题转折，配**配额**（内心独白 标准 1 处·≤25 字 / 长档 2 处·≤30 字 / 漫剧 1 处·≤20 字；旁白 ≤1 处·≤12 字）、**前 3 秒与断章禁用、禁连排**、独白**不承担交代设定**；附三种写法模板（委屈账 / 点题句 / 立人设句）与平台赛道差异。
+10. **评审问题卡＋保护性反例＋升级评测**（`references/script-doctor-protocol.md` · `protective-counterexamples.md` · `skill-eval-protocol.md`，v3.4 新增）：评审官 / 修复器双角色与问题卡十一字段，P0/P1/P2 按影响定级，**不设总分、不预测爆款**；机检三级语义 FAIL 必修 / WARN 复核 / **NOTE 不要求修改**（防规则把安静场、直说、长句判成缺陷）；升级后按**固定用例＋保留题＋盲评＋证据分层**验收。
 
 ## 交互模式（8 个）
 
@@ -55,19 +58,20 @@
 
 ```bash
 # 安装到技能目录后直接对话："写短剧" "立项：赘婿战神" "/长档大纲 40集" "/连写 1-5"
-python3 scripts/validate_episode.py --self-test
-python3 scripts/validate_episode.py examples/long-format-3min-demo.md --format long
-python3 scripts/validate_series.py --self-test
+# 命令按 Windows 写 python；macOS / Linux 用 python3
+python scripts/validate_episode.py --self-test
+python scripts/validate_episode.py examples/long-format-3min-demo.md --format long
+python scripts/validate_series.py --self-test
 ```
 
 ## 结构
 
 ```text
 short-drama-factory/
-├── SKILL.md                    # 入口：档位表+流派/档位两道门+8模式+9红线+执行顺序
-├── references/                 # 11 个权威库（往返法/台账/改编/圣经/仿写/题材/结构+长档/钩子/断章/台词/合规）
-├── templates/                  # 台账空表（含档位行）+ 单集排版（标准/长档双模板）
-├── scripts/                    # 单集分档机检 + 全剧台账机检
+├── SKILL.md                    # 入口：档位表+流派/档位两道门+8模式+10红线+执行顺序
+├── references/                 # 18 个权威库（往返法/台账/改编/圣经/仿写/题材/结构+长档/钩子/断章/台词/合规/工艺层/独白旁白/评审问题卡/保护性反例/升级评测/前三集节拍卡/冲突形态五型）
+├── templates/                  # 台账空表（含档位行）+ 单集排版（标准/长档双模板 + 独白配额表 + 神态短语规格：画面词｜语气词）
+├── scripts/                    # 单集分档机检（E1~E23 + N12~N14） + 全剧台账机检（S1~S8）
 ├── examples/ep01-longwang-demo.md · examples/long-format-3min-demo.md
 ```
 
