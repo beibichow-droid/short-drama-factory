@@ -1,4 +1,4 @@
-<img src="assets/banner.svg" alt="Short-Drama Factory v4.3 · 抖音/红果爆款短剧工业化编剧超级系统" width="100%">
+<img src="assets/banner-v4.3.svg" alt="Short-Drama Factory v4.3 · 抖音/红果爆款短剧工业化编剧超级系统" width="100%">
 
 <p align="center">
 <a href="#核心方法论情绪契约单元链"><img src="https://img.shields.io/badge/version-v4.3-gold?style=for-the-badge" alt="version"></a>
