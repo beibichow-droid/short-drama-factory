@@ -25,6 +25,7 @@
 | LOGO | 类型 | 赞助商名称 | 说明 | 网站 |
 | --- | --- | --- | --- | --- |
 | <img src="assets/omniboard.jpg" alt="OmniBoard" width="160"> | 企业 | OmniBoard | 字字动画旗下专业漫剧创作画布工具，从剧本到发行变现全链路一站式，新手可用 H3 模型五分钱一秒 | [omniboard.tv/register?ref=GITHUBADD7DZ](https://omniboard.tv/register?ref=GITHUBADD7DZ) |
+| <img src="assets/himadrama.jpg" alt="喜马抓马" width="160"> | 团队 | 喜马抓马 | AI 视听全链路综合服务平台 · HimaStudio 深度适配漫剧老李 Skill | [himadrama.com](https://www.himadrama.com) |
 | *（LOGO 占位）* | — | 虚位以待 | 赞助位开放中——让你的产品出现在众多 AI 短剧创作者面前 | [联系我们](mailto:lixiaoxiao9888@gmail.com) |
 
 > 💡 **招商说明**：赞助位对模型渠道、算力平台、API 服务商及创作团队开放。
